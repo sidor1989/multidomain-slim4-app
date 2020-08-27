@@ -1,0 +1,58 @@
+{# template/users.twig #}
+{% extends 'admin/layout.twig' %}
+{% block title %}Domains{% endblock %}
+{% block content %}
+    <a href="{{ url_for('domainsCreate') }}" class="btn btn-primary">Add Domain</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Id</th>
+                <th>Name domain</th>
+                <th>Name town cyrilic</th>
+                <th>Name diler</th>
+                <th>Email</th>
+                <th>Site</th>
+                <th>Phones</th>
+                <th>Towns</th>
+                <th>Map coordinats</th>
+                <th>Active</th>
+                <th>Created at</th>
+                <th>Edit</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% if domains %}
+
+
+                {% for domain in domains %}
+                    <tr>
+                        <td>{{ domain.id }}</td>
+                        <td>{{ domain.name_domain }}</td>
+                        <td>{{ domain.name_town_cyrilic }}</td>
+                        <td>{{ domain.name_diler }}</td>
+                        <td>{{ domain.email }}</td>
+                        <td>{{ domain.site }}</td>
+                        <td>{{ domain.phones }}</td>
+                        <td>{{ domain.towns }}</td>
+                        <td>{{ domain.map_coordinats }}</td>
+                        <td>{{ domain.active }}</td>
+                        <td>{{ domain.created_at }}</td>
+                        <td><a href="{{ url_for('domainsEdit', {id: domain.id}   ) }}" class="btn btn-success">Edit</a>
+                            <form action="{{ url_for('domainsDelete', {id: domain.id}   ) }}" method="post" enctype="application/x-www-form-urlencoded">
+                                <input type="hidden" name="_METHOD" value="DELETE"/>
+                                <input class="btn btn-primary" type="submit" value="Delete" onclick="return confirm('are you sure?')"/>
+                            </form>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+            {% endif %}
+
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

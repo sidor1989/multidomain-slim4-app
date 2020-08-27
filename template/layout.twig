@@ -1,0 +1,209 @@
+{# template/layout.twig #}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock %}"/>
+    <meta name="keywords" content=""/>
+
+    <!-- Pixeden Icon -->
+    <link rel="stylesheet" type="text/css" href="/css/pe-icon-7.css"/>
+
+    <!--Slider-->
+    <link rel="stylesheet" href="/css/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css"/>
+
+    <!-- css -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/materialdesignicons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+
+<!-- Loader -->
+<!--div id="preloader">
+    <div id="status">
+        <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
+    </div>
+</div-->
+
+
+<!--Navbar Start-->
+<nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark navbar-light nav-dark">
+    <div class="container">
+        <!-- LOGO -->
+        <a class="navbar-brand logo" href="{{ url_for('home') }}">
+            <img src="" alt="" class="">
+        </a>
+        <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="mdi mdi-menu"></i>
+        </button-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto navbar-center" id="mySidenav">
+
+
+                <!--li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
+                </li-->
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Продукция</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">О нас</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#features" class="nav-link">Приемущества</a>
+                </li>
+                {% if courses is not empty %}
+                    <li class="nav-item">
+                        <a href="#pricing" class="nav-link">Курсы</a>
+                    </li>
+                {% endif %}
+                {% if clients is not empty %}
+                    <li class="nav-item">
+                        <a href="#clients" class="nav-link">Клиенты</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Контакты</a>
+                </li>
+
+                <div class="dropdown pull-left">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Выберите ваш город
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {% for domainItem in domainsList %}
+                            <a class="dropdown-item" href="javascript:void(0)"
+                               onclick="window.location.replace('http://{{ domainItem.name_domain }}.сайт.рф');">{{ domainItem.name_town_cyrilic }}</a>
+                        {% endfor %}
+                    </div>
+
+
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+
+
+{% if flash %}
+    <section class="" style="margin-top: 5rem;">
+        <div class="container mt-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert">
+                        <ul>
+                            {% for message in flash %}
+                                <li>{{ message|join(', ') }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<!-- Footer Start -->
+<section class="footer">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-lg-4 col-sm-6">
+                <div class="mb-4">
+                    <a href="layout-two-1"><img src="/images/logo-white.png" alt="" class="logo-light"/></a>
+
+                </div>
+                {% if domain.id == 1 %}
+
+                    <p class="footer-desc f-15">{{ domain.name_diler }}</p>
+                    <p class="footer-desc f-15">{{ domain.address }}</p>
+
+                {% else %}
+                <p class="footer-desc f-15">{{ domain.name_diler }}, авторизованный дилер ТД
+                    городе {{ domain.name_town_cyrilic }}</p>
+                <p class="footer-desc f-15">{{ domain.address }}</p>
+                {% endif %}
+                <ul class="footer-icons list-inline f-20 mb-0 mt-4">
+                    <li class="list-inline-item mr-3"><a href="" class=""><i class="mdi mdi-facebook"></i></a></li>
+                    <li class="list-inline-item mr-3"><a href="" class=""><i class="mdi mdi-vk"></i></a></li>
+                    <li class="list-inline-item"><a href="" class=""><i class="mdi mdi-instagram"></i></a></li>
+
+                </ul>
+            </div>
+            <div class="col-lg-7 offset-lg-1">
+                <div class="row mt-lg-0">
+                    <!--div class="col-md-4 mt-4 mt-lg-0">
+                        <h5 class="footer-list-title f-18 font-weight-normal mb-3">Покупателю</h5>
+                        <ul class="list-unstyled company-sub-menu">
+                            <li><a href="">Приемущества</a></li>
+                            <li><a href="">Курсы</a></li>
+                        </ul>
+                    </div-->
+                    <div class="col-lg-4 mt-4 mt-lg-0 offset-lg-8">
+                        <h5 class="footer-list-title f-18 font-weight-normal mb-3">О компании</h5>
+                        <ul class="list-unstyled company-sub-menu">
+                            <li><a href="#about">О нас</a></li>
+                            <li><a href="#services">Продукция</a></li>
+                            <li><a href="#contact">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <!--div class="col-md-4 mt-4 mt-lg-0">
+                        <h5 class="footer-list-title f-18 font-weight-normal mb-3">Дополнительная информация</h5>
+                        <ul class="list-unstyled company-sub-menu">
+                            <li><a href="">Доставка и возврат</a></li>
+                            <li><a href="">Политика конфиденциальности</a></li>
+                        </ul>
+                    </div-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 mt-3">
+                <div class="text-center footer-alt my-3">
+                    <p class="f-15">2011 - {{ 'now'|date('Y') }} ©</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer End -->
+
+<!-- javascript -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/scrollspy.min.js"></script>
+<script src="/js/jquery.easing.min.js"></script>
+<!-- COUNTER -->
+<script src="/js/counter.int.js"></script>
+<!-- carousel -->
+<script src="/js/owl.carousel.min.js"></script>
+<!-- Main Js -->
+<script src="/js/app.js"></script>
+
+</body>
+</html>
+
+
+

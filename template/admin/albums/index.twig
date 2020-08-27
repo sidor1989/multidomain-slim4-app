@@ -1,0 +1,37 @@
+{# template/albums/index.twig #}
+{% extends 'admin/layout.twig' %}
+{% block title %}Albums{% endblock %}
+{% block content %}
+    <a href="{{ url_for('albumsCreate') }}" class="btn btn-primary">Add Album</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Id</th>
+                <th>Name album</th>
+                <th>Active</th>
+                <th>Created at</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if albums %}
+                {% for album in albums %}
+                    <tr>
+                        <td>{{ album.id }}</td>
+                        <td>{{ album.name }}</td>
+                        <td>{{ album.active }}</td>
+                        <td>{{ album.created_at }}</td>
+                        <td><a href="{{ url_for('albumsEdit', {id: album.id}   ) }}" class="btn btn-success">Edit</a>
+                            <form action="{{ url_for('albumsDelete', {id: album.id}   ) }}" method="post" enctype="application/x-www-form-urlencoded">
+                                <input type="hidden" name="_METHOD" value="DELETE"/>
+                                <input class="btn btn-primary" type="submit" value="Delete" onclick="return confirm('are you sure?')"/>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

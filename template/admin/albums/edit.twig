@@ -1,0 +1,15 @@
+{# template/clients/create.twig #}
+{% extends 'admin/layout.twig' %}
+{% block title %}Album edit{% endblock %}
+{% block content %}
+
+
+    <form action="{{ url_for('albumsEditStore' ,  {id: album.id}) }}" method="post" enctype="multipart/form-data">
+        {% include 'admin/albums/_form.twig' %}
+    </form>
+
+
+    {% include 'admin/albums/_formDragndrop.twig' %}
+
+
+{% endblock %}

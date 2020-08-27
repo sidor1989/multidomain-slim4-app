@@ -1,0 +1,11 @@
+{# template/clients/create.twig #}
+{% extends 'admin/layout.twig' %}
+{% block title %}Client create{% endblock %}
+{% block content %}
+
+    <form action="{{ url_for('clientsEditStore' ,  {id: client.id} ) }}" method="post" enctype="multipart/form-data">
+        {% include 'admin/clients/_form.twig' %}
+    </form>
+
+
+{% endblock %}

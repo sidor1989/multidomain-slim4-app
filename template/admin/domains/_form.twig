@@ -1,0 +1,72 @@
+<div class="form-group">
+    <label for="name_domain-input">Name domain</label>
+    <input class="form-control" type="text" value="{{ old.name_domain ?? domain.name_domain }}" name="name_domain" id="name_domain-input">
+</div>
+<div class="form-group">
+    <label for="name_town_cyrilic-input">Name domain cyrilic</label>
+    <input class="form-control" type="text" value="{{ old.name_town_cyrilic ?? domain.name_town_cyrilic }}" name="name_town_cyrilic" id="name_town_cyrilic-input">
+</div>
+
+
+<div class="form-group">
+    <label for="name_diler-input">Name diler</label>
+    <input class="form-control" type="text" value="{{ old.name_diler ?? domain.name_diler }}" name="name_diler" id="name_diler-input">
+</div>
+
+<div class="form-group">
+    <label for="EmailInput">Email</label>
+    <input type="email" class="form-control" value="{{ old.email ?? domain.email }}" name="email" id="EmailInput">
+</div>
+
+<div class="form-group">
+    <label for="site">Site</label>
+    <input class="form-control" type="text" value="{{ old.site ?? domain.site }}" name="site" id="site">
+</div>
+
+<div class="form-group">
+    <label for="phones">Phones</label>
+    <input class="form-control" type="text" value="{{ old.phones ?? domain.phones }}" name="phones" id="phones">
+</div>
+
+<div class="form-group">
+    <label for="address">Address</label>
+    <input class="form-control" type="text" value="{{ old.address ?? domain.address }}" name="address" id="address">
+</div>
+
+<div class="form-group">
+    <label for="towns">Towns</label>
+    <input class="form-control" type="text" value="{{ old.towns ?? domain.towns }}" name="towns" id="towns">
+</div>
+
+<div class="form-group">
+    <label for="map_coordinats">Map coordinats</label>
+    <span class="badge badge-secondary">For explode coordants any towns use "|"</span>
+    <input class="form-control" type="text" value="{{ old.map_coordinats ?? domain.map_coordinats }}" name="map_coordinats" id="map_coordinats">
+</div>
+
+<div class="form-group">
+    <label for="album_id">Album id</label>
+    <span class="badge badge-secondary">Whrite album id</span>
+    <input class="form-control" type="text" value="{{ old.album_id ?? domain.album_id }}" name="album_id" id="album_id">
+</div>
+
+
+<div class="form-check">
+    <input type="hidden" name="active" value="0">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="active"  {{ domain.active ? 'checked' : '' }}  value="1}">
+
+    <label class="form-check-label" for="exampleCheck1">Active</label>
+</div>
+
+<div class="form-group">
+    <label for="content_1">Content 1</label>
+    <textarea class="form-control" id="content_1" name="content_1">{{ old.content_1 ?? domain.content_1 }}</textarea>
+</div>
+
+<div class="form-group">
+    <label for="content_2">Цифры для счетчика по порядку через пробел, если оставить пустым то будут цифры 5000,150,4500</label>
+    <span class="badge badge-secondary">Content 2</span>
+    <input class="form-control" type="text" value="{{ old.content_2 ?? domain.content_2 }}" name="content_2" id="content_2">
+</div>
+
+<button class="btn btn-primary" type="submit">Submit form</button>

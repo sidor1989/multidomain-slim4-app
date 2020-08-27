@@ -1,0 +1,434 @@
+{# template/hello.twig #}
+{% extends 'layout.twig' %}
+{% block title %}Дилер ТД Дентал Гуру в городе {{ domain.name_town_cyrilic }} - {{ domain.name_diler }}{% endblock %}
+{% block description %}Дилер ТД Дентал Гуру(MEGAGEN, IMPRO, IQDENT, UNIPOWER) в городе {{ domain.name_town_cyrilic }} - {{ domain.name_diler }}{% endblock %}
+{% block content %}
+
+
+
+
+    <!-- Hero Start -->
+    <section class="hero-3-bg position-relative d-flex align-items-center" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="hero-title">
+                        {% if domain.id == 1 %}
+                            <!--span class="badge badge-primary text-uppercase mb-4">Something Amazing</span-->
+                            <h1>{{ domain.name_diler }}</h1>
+
+
+                            <p class="text-muted mb-2 pb-2">Телефоны для связи {{ domain.phones }}</p>
+                            <p class="text-muted mb-2 pb-2">Почта {{ domain.email }}</p>
+
+                            <a href="https://{{ domain.site }}" class="btn btn-primary btn-sm">Сайт Торгового Дома<span
+                                        class="ml-2 right-icon">&#8594;</span></a>
+
+
+                          {% else %}
+                            <!--span class="badge badge-primary text-uppercase mb-4">Something Amazing</span-->
+                            <h1>{{ domain.name_diler }}</h1>
+
+                            <h2 class="title text-muted font-weight-normal mb-4">Авторизованный дилер ТД Дентал Гуру в
+                                городе <span class="title">{{ domain.name_town_cyrilic }}</span></h2>
+                            <p class="text-muted mb-2 pb-2">Телефоны для связи {{ domain.phones }}</p>
+                            <p class="text-muted mb-2 pb-2">Почта {{ domain.email }}</p>
+                            <p class="text-muted mb-4 pb-2">Адрес {{ domain.address }}</p>
+
+                            <a href="https://{{ domain.site }}" class="btn btn-primary btn-sm">Сайт дилера<span
+                                        class="ml-2 right-icon">&#8594;</span></a>
+
+
+                        {% endif %}
+
+                    </div>
+                </div>
+                <!--div class="col-lg-5 offset-lg-1">
+                    <div class="mt-5 mt-lg-0">
+                        <img src="/images/hero-3-img.png" alt="" class="img-fluid mx-auto d-block">
+                    </div>
+                </div-->
+
+                {% include 'map.twig' with {'domain': domain} %}
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Hero End -->
+
+    <!--section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md client-logo mb-4 mb-lg-0">
+                    <img src="/images/client-logo/1.png" alt="" class="img-fluid mx-auto d-block p-4">
+                </div>
+                <div class="col-md client-logo mb-4 mb-lg-0">
+                    <img src="/images/client-logo/2.png" alt="" class="img-fluid mx-auto d-block p-4">
+                </div>
+                <div class="col-md client-logo mb-4 mb-lg-0">
+                    <img src="/images/client-logo/3.png" alt="" class="img-fluid mx-auto d-block p-4">
+                </div>
+                <div class="col-md client-logo mb-4 mb-lg-0">
+                    <img src="/images/client-logo/4.png" alt="" class="img-fluid mx-auto d-block p-4">
+                </div>
+                <div class="col-md client-logo mb-4 mb-lg-0">
+                    <img src="/images/client-logo/5.png" alt="" class="img-fluid mx-auto d-block p-4">
+                </div>
+            </div>
+        </div>
+    </section-->
+
+    <!-- Service Start -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="text-center mb-5">
+                        <h4 class="text-uppercase mb-0">Продукция</h4>
+                        <div class="my-3">
+                            <img src="/images/title-border-g.png" alt="" class="img-fluid mx-auto d-block">
+                        </div>
+                        <p class="text-muted f-14">Мы работаем с брендами ведущих мировых производителей</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="service-img mr-lg-5 mb-5 mb-lg-0">
+                        <img src="/images/banners/ar.jpg" alt="" class="img-fluid mx-auto d-block">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="service-box service-box-1 p-4">
+                                <img src="/images/banners/ao.jpg" alt="" class="img-fluid mx-auto d-block">
+                            </div>
+                            <div class="service-box service-box-1 p-4">
+                                <img src="/images/banners/iqDent.jpg" alt="" class="img-fluid mx-auto d-block">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="service-box service-box-1 p-4 ">
+                                <img src="/images/banners/Impro.jpg" alt="" class="img-fluid mx-auto d-block">
+                            </div>
+                            <div class="service-box service-box-1 p-4">
+                                <img src="/images/banners/up.jpg" alt="" class="img-fluid mx-auto d-block">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Service End -->
+
+    <!-- About us Start -->
+    <section class="section bg-light" id="about">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="text-center mb-5">
+                        <h4 class="text-uppercase mb-0">О нас</h4>
+                        <div class="my-3">
+                            <img src="/images/title-border-g.png" alt="" class="img-fluid mx-auto d-block">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+
+                    <h1 class="title font-weight-normal line-height-1_4 mb-4">{{ domain.name_diler }}</h1>
+                    <div class="about-border my-4"></div>
+                    <p class="text-muted mb-4 f-15">
+                        {{ domain.content_1 | raw }}
+                    </p>
+
+                </div>
+
+                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0">
+                    {% for i in albumItems %}
+                        <img src="/uploads/{{ i.filename }}" alt="" class="img-fluid mx-auto d-block">
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About us End -->
+
+    <!-- Fetures Start -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="text-center mb-5">
+                        <h4 class="text-uppercase mb-0">Наши преимущества</h4>
+                        <div class="my-3">
+                            <img src="/images/title-border-g.png" alt="" class="img-fluid mx-auto d-block">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box text-center px-4 py-5">
+                        <div class="text-primary feature-icon mb-3">
+                            <i class="pe-7s-repeat"></i>
+                        </div>
+                        <h6 class="text-uppercase mb-1 title f-18">Обмен имплантатов</h6>
+                        <a href="https://tdentalgu.ru/service/replacement-of-implants/" class="more-info f-15">форма
+                            замены <span class="ml-2 right-icon">→</span></a>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box text-center px-4 py-5">
+                        <div class="text-primary feature-icon mb-3">
+                            <i class="pe-7s-tools"></i>
+                        </div>
+                        <h6 class="text-uppercase mb-1 title f-18">Аренда хирургического набора</h6>
+                        <p class="text-muted mb-0">Возможность опробовать систему</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box text-center px-4 py-5">
+                        <div class="text-primary feature-icon mb-3">
+                            <i class="pe-7s-world"></i>
+                        </div>
+                        <h6 class="text-uppercase mb-1 title f-18">Международный опыт</h6>
+                        <p class="text-muted mb-0">повышения квалификации</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fetures End -->
+
+    <!-- Counter Start -->
+    <Section class="section counter-bg">
+        <div class="counter-bg-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center" id="counter">
+                <div class="col-lg-3 col-md-6">
+                    <div class="mb-4 mb-lg-0">
+                        <h2 class="text-white mb-4">Важные факты</h2>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="counter-box-1 text-center px-4 py-5 mb-4 mb-lg-0">
+                        <div class="text-white">
+                            <img src="/images/icon/implant.png" alt="" class="img-fluid mx-auto d-blok">
+                            <h1 class="mb-2 mt-3"><span class="counter-value mt-4" data-count="{{ domain.content_2[0] }}">0</span>+</h1>
+                            <p class="mb-0 text-white-70">Установленных имплантатов</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="counter-box-1 text-center px-4 py-5 mb-4 mb-lg-0">
+                        <div class="text-white">
+                            <i class="pe-7s-user"></i>
+                            <h1 class="mb-2 mt-3"><span class="counter-value mt-4" data-count="{{ domain.content_2[1] }}">0</span>+</h1>
+                            <p class="mb-0 text-white-70">Докторов в вашем регионе</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="counter-box-1 text-center px-4 py-5 mb-4 mb-lg-0">
+                        <div class="text-white">
+                            <!--img src="/images/icon/icon-3.png" alt="" class="img-fluid mx-auto d-blok"-->
+                            <i class="pe-7s-smile"></i>
+                            <h1 class="mb-2 mt-3"><span class="counter-value mt-4" data-count="{{ domain.content_2[2] }}">0</span>+</h1>
+                            <p class="mb-0 text-white-70">Счастливых пациентов</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Section>
+    <!-- Counter End -->
+    {% if courses is not empty %}
+        <!-- Pricing Start -->
+        <section class="section" id="pricing">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="text-center mb-5">
+                            <h4 class="text-uppercase mb-0">Ближайшие мероприятия</h4>
+                            <div class="my-3">
+                                <img src="/images/title-border-g.png" alt="" class="img-fluid mx-auto d-block">
+                            </div>
+                            <!--p class="text-muted f-14">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                accusantium doloremque laudantium.</p-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!--div class="col-lg-12">
+                        <img src="/images/shedules.jpg" alt="" class="img-fluid mx-auto d-block">
+                    </div-->
+                    {% for course in courses %}
+                        <div class="col-lg-12">
+                            <div class="pricing-box rounded  px-4 py-5 mb-4 row">
+
+                                <div class="col-lg-10">
+                                    <h3 class="pricing-title title ">{{ course.title }}</h3>
+
+                                    <div class="text-muted ">
+                                        <p class="">Город: <b class="highlight">{{ course.city }}</b></p>
+                                        <p class="">Лектор(ы): <b class="highlight">{{ course.lectors }}</b></p>
+                                        <p class="">Дата: <b
+                                                    class="highlight"></b>{{ course.date1|date("d-m-Y") }}{% if  course.date2 is not empty %} - {{ course.date2|date("d-m-Y") }}{% endif %}
+                                        </p>
+                                    </div>
+                                    <p class="text-muted f-15 mb-2">{{ course.data }}</p>
+                                    <a href="https://kursdentalgu.ru/{{ course.alias }}"
+                                       class="btn btn-outline-primary ">Подробнее <span
+                                                class="ml-2 right-icon">&#8594;</span></a>
+                                </div>
+                                <div class="col-lg-2 d-none d-md-block">
+                                    <img src="https://kursdentalgu.ru{{ course.img }}" alt="{{ course.title }}"
+                                         class="img-thumbnail mx-auto d-block">
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
+        <!-- Pricing End -->
+    {% endif %}
+    {% if clients is not empty %}
+        <!-- Clients Start -->
+        <section class="section bg-light" id="clients">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
+                        <div class="text-center mb-5">
+                            <h4 class="text-uppercase mb-0">Наши клиенты</h4>
+                            <div class="my-3">
+                                <img src="/images/title-border-g.png" alt="" class="img-fluid mx-auto d-block">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!--img src="/images/clients.jpg" alt="" class="img-fluid mx-auto d-block"-->
+                    <div class="owl-carousel owl-theme">
+
+                        {% for client in clients %}
+                            <div class="item">
+                                <div class="testi-content testi-content-1 text-center m-3 p-4 position-relative">
+                                    <p class="text-muted mb-4 position-relative f-15">{{ client.description }}</p>
+                                    <img src="{{ client.getImage() }}" alt=""
+                                         class="img-fluid mx-auto user-img">
+                                    <h5 class="title mb-0 user-name mt-4 f-18">{{ client.name }}</h5>
+                                    <p class="text-muted mb-2 f-15">{{ client.sub_name }}</p>
+                                    <ul class="list-unstyled text-warning mb-0">
+                                        <li class="list-inline-item mr-1"><i class="mdi mdi-star"></i></li>
+                                        <li class="list-inline-item h3 mb-0 mr-1"><i class="mdi mdi-star"></i></li>
+                                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Clients End -->
+    {% endif %}
+
+
+    <!-- contact Us Start -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="text-center mb-5">
+                        <h4 class="text-uppercase mb-0">Форма обратной связи</h4>
+                        <div class="my-3">
+                            <img src="/images/title-border-g.png" alt="" class="img-fluid mx-auto d-block">
+                        </div>
+                        <p class="text-muted f-14">Мы свяжемся с вами</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="custom-form mt-4 mt-lg-0">
+                        <div id="message" style="color: red; display: none;">Спасибо, мы обязательно свяжемся с вами</div>
+                        <form method="post" action="/" name="contact-form" id="contact-form">
+                            <input type="hidden" value="{{ domain.email }}"  id="emailtarget" name="emailtarget">
+                            <input id="check" name="check" type="hidden" value="" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group app-label">
+                                        <label for="name">Имя</label>
+                                        <input name="name" id="name" type="text" class="form-control"
+                                               placeholder="Введите ваше имя.." value="">
+                                    </div>
+                                    <div class="form-group app-label drrr">
+                                        <label for="surname">Отчесвто</label>
+                                        <input name="surname" id="surname" type="text" class="form-control"
+                                               placeholder="Введите ваше отчесвто.." value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group app-label">
+                                        <label for="email">Ваша почта</label>
+                                        <input name="email" id="email" type="email" class="form-control"
+                                               placeholder="Введите вашу почту.." required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group app-label">
+                                        <label for="comments">Сообщение</label>
+                                        <textarea name="comments" id="comments" rows="3" class="form-control"
+                                                  placeholder="Введите ваше сообщение.."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" id="submit" name="send" class="btn btn-primary" onclick="document.getElementById('check').value = '662233';">Отправить
+                                    </button>
+                                    <div id="simple-msg"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- contact Us End -->
+
+<style>
+    input[name="surname"],.drrr {
+        display: block;
+        width: 2px;
+        height: 3px;
+        margin-bottom: -3px;
+        opacity: 0.01;
+    }
+</style>
+{% endblock %}

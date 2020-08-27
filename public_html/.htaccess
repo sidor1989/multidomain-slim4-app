@@ -1,0 +1,17 @@
+RewriteEngine On
+
+#Order deny,allow
+#deny from all
+##### Список IP через пробел, с которых доступ разрешен #####
+#Allow from 185.59.140.98
+
+
+RewriteCond %{HTTP:X-HTTPS} !1
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^ index.php [QSA,L]
+
+php_flag display_errors 1

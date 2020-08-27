@@ -1,0 +1,30 @@
+<div class="form-group">
+    <label for="domain_id">Domain bind</label>
+    <select id="domain_id" class="form-control" name="domain_id">
+        {% for domain in domains %}
+            <option   {% if domain.id == course.domain_id %}selected{% endif %} value="{{ domain.id }}">{{ domain.name_domain }}</option>
+        {% endfor %}
+        <option   {% if 0 == course.domain_id %}selected{% endif %} value="0">Отвязан</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="title-input">Title</label>
+    <input class="form-control" type="text" value="{{ old.title ?? course.title }}" name="title" id="title-input">
+</div>
+
+<div class="form-group">
+    <label for="city-input">City</label>
+    <input class="form-control" type="text" value="{{  old.city ?? course.city }}" name="city" id="city-input">
+</div>
+
+
+
+<div class="form-check">
+    <input type="hidden" name="active" value="0">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="active"  {{ course.active ? 'checked' : '' }}  value="1}">
+
+    <label class="form-check-label" for="exampleCheck1">Active</label>
+</div>
+
+<button class="btn btn-primary" type="submit">Submit form</button>

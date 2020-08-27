@@ -1,0 +1,300 @@
+<hr>
+<div id="drop-area">
+    <form class="my-form" method="post"
+          enctype="multipart/form-data">
+
+        <div class="form-group">
+
+            <div class="alert alert-warning" role="alert">
+                <p>Загрузите изображения с помощью диалога выбора файлов или перетащив нужные изображения в выделенную
+                    область</p>
+                <p>для удаления кликните правой кнопкой мыши по изображению</p>
+            </div>
+            <div class="alert alert-danger" role="alert">
+                Максимальный размер изображения 150 килобайт
+            </div>
+
+            <label for="fileElem" class="btn btn-primary">Выбрать изображения</label>
+            <progress id="progress-bar" max=100 value=0></progress>
+            <input type="file" id="fileElem" name="imgs[]" multiple accept="image/*" onchange="handleFiles(this.files)">
+        </div>
+
+    </form>
+    <div id="gallery"></div>
+</div>
+
+
+<script>
+    //переменные для прогресс-бара
+    let uploadProgress = []
+    let progressBar = document.getElementById('progress-bar')
+
+    //определим элемент для драг н дропа
+    let dropArea = document.getElementById('drop-area');
+
+    //рисуем элементы с сервера
+    showImgFromServer()
+
+    function getFilesFromServer() {
+
+        // 1. Создаём новый объект XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+
+        // 2. Конфигурируем его: GET-запрос на URL '/admin/albums-items/'
+        xhr.open('GET', '/admin/albums-items/{{ album.id }}/', false);
+
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+        // 3. Отсылаем запрос
+        xhr.send();
+
+        // 4. Если код ответа сервера не 200, то это ошибка
+        if (xhr.status != 200) {
+            // обработать ошибку
+            console.log(xhr.response)
+        } else {
+            // вывести результат
+            return JSON.parse(xhr.response);
+        }
+
+    }
+
+
+    function showImgFromServer() {
+        let gallery = document.getElementById('gallery');
+        gallery.innerHTML = '';
+
+        var filesFromServer = getFilesFromServer();
+
+        Object.keys(filesFromServer).map(function (objectKey, index) {
+            var value = filesFromServer[objectKey];
+
+            let img = document.createElement('img');
+            img.className += " img-thumbnail";
+            img.setAttribute('data-id', value.id);
+            img.src = '/uploads/' + value.filename;
+            gallery.appendChild(img);
+            addListenerOnAddElement(img);
+            //  console.log(value);
+        });
+    }
+
+
+    function addListenerOnAddElement(element) {
+        element.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+
+            let id_img = event.target.getAttribute("data-id");
+            console.log(id_img);
+
+            if (confirm("are you sure?")) {
+                // console.log(event.target);
+                doingRequestDelete(id_img)
+                document.getElementById('gallery').removeChild(event.target)
+
+            } else {
+                alert("Вы нажали кнопку отмена")
+
+            }
+
+
+        }, true);
+    }
+
+    function doingRequestDelete(id_img) {
+
+        console.log(id_img)
+
+
+        // Создаём объект класса XMLHttpRequest
+        const request = new XMLHttpRequest();
+
+        /*  Составляем строку запроса и кладем данные, строка состоит из:
+        пути до файла обработчика ? имя в GET запросе где будет лежать значение запроса id_product и
+        через & мы передаем количество qty_product. */
+        const url = "/admin/albums-items/delete/" + id_img + "/";
+
+        /* Здесь мы указываем параметры соединения с сервером, т.е. мы указываем метод соединения GET,
+        а после запятой мы указываем путь к файлу на сервере который будет обрабатывать наш запрос. */
+        request.open('POST', url);
+
+        // Указываем заголовки для сервера, говорим что тип данных, - контент который мы хотим получить должен быть не закодирован.
+        request.setRequestHeader('Content-Type', 'application/x-www-form-url');
+
+        // Здесь мы получаем ответ от сервера на запрос, лучше сказать ждем ответ от сервера
+        request.addEventListener("readystatechange", () => {
+
+            /*   request.readyState - возвращает текущее состояние объекта XHR(XMLHttpRequest) объекта,
+            бывает 4 состояния 4-е состояние запроса - операция полностью завершена, пришел ответ от сервера,
+            вот то что нам нужно request.status это статус ответа,
+            нам нужен код 200 это нормальный ответ сервера, 401 файл не найден, 500 сервер дал ошибку и прочее...   */
+            if (request.readyState === 4 && request.status === 302) {
+
+                // выводим в консоль то что ответил сервер
+
+                console.log(request);
+
+            }
+        });
+
+        // Выполняем запрос
+        request.send();
+
+        // document.getElementById('gallery').innerHTML = '';
+        // showImgFromServer()
+
+
+    }
+
+
+    //отменим стандартное поведение
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false)
+    })
+
+    function preventDefaults(e) {
+        e.preventDefault()
+        e.stopPropagation()
+    }
+
+    //добавим подсветку
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false)
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false)
+    });
+
+    function highlight(e) {
+        dropArea.classList.add('highlight')
+    }
+
+    function unhighlight(e) {
+        dropArea.classList.remove('highlight')
+    }
+
+    dropArea.addEventListener('drop', handleDrop, false)
+
+    function handleDrop(e) {
+        let dt = e.dataTransfer
+        let files = dt.files
+        handleFiles(files)
+    }
+
+    function handleFiles(files) {
+        files = [...files]
+        initializeProgress(files.length) // вызов функции прогресс барра
+        files.forEach(uploadFile)
+        files.forEach(previewFile)
+    }
+
+    //загружаем данные на сервер
+    function uploadFile(file, i) { // <- Добавили параметр `i`
+        var url = '/admin/albums-items/create/{{ album.id }}/'
+        var xhr = new XMLHttpRequest()
+        var formData = new FormData()
+        xhr.open('POST', url, true)
+        // Добавили следующие слушатели
+        xhr.upload.addEventListener("progress", function (e) {
+            updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+        })
+        xhr.addEventListener('readystatechange', function (e) {
+            // console.log(xhr.status);
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Готово. Сообщаем пользователю
+                iziToast.success({
+                    title: 'ok',
+                    message: 'Image uploaded ' + file.name
+                });
+            } else if (xhr.readyState == 4 && xhr.status != 200) {
+                iziToast.warning({
+                    title: 'Hey',
+                    message: 'Error! File not uploaded ' + file.name
+                });
+            }
+        })
+        formData.append('file', file)
+        xhr.send(formData)
+    }
+
+    //функция просмотра картинок
+    function previewFile(file) {
+        console.log(file);
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onloadend = function () {
+            showImgFromServer()
+        }
+    }
+
+
+    // функции управления прогресс-баром
+    function initializeProgress(numFiles) {
+        progressBar.value = 0
+        uploadProgress = []
+        for (let i = numFiles; i > 0; i--) {
+            uploadProgress.push(0)
+        }
+    }
+
+    function updateProgress(fileNumber, percent) {
+        uploadProgress[fileNumber] = percent
+        let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
+        progressBar.value = total
+    }
+
+
+</script>
+
+<style>
+    #drop-area {
+        border: 2px dashed #ccc;
+        border-radius: 20px;
+
+        font-family: sans-serif;
+
+        padding: 20px;
+    }
+
+    #drop-area.highlight {
+        border-color: purple;
+    }
+
+    p {
+        margin-top: 0;
+    }
+
+    .my-form {
+        margin-bottom: 10px;
+    }
+
+    #gallery {
+        margin-top: 10px;
+    }
+
+    #gallery img {
+        width: 150px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px;
+        background: #ccc;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .button:hover {
+        background: #ddd;
+    }
+
+    #fileElem {
+        display: none;
+    }
+
+
+</style>

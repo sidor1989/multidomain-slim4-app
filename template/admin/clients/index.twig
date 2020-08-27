@@ -1,0 +1,50 @@
+{# template/clients/index.twig #}
+{% extends 'admin/layout.twig' %}
+{% block title %}Cleints{% endblock %}
+{% block content %}
+    <a href="{{ url_for('clientsCreate') }}" class="btn btn-primary">Add Cleint</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Id</th>
+                <th>Name Client</th>
+                <th>Name Domain</th>
+                <th>Name sub title</th>
+                <th>Image</th>
+                <th>Active</th>
+                <th>Created at</th>
+                <th>Edit</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% if clients %}
+
+
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.id }}</td>
+                        <td>{{ client.name }}</td>
+                        <td>{{ client.domain.name_domain }}</td>
+                        <td>{{ client.sub_name }}</td>
+                        <td> <img src="{{ client.getImage() }}" alt="" class="img-responsive" width="100"></td>
+                        <td>{{ client.active }}</td>
+                        <td>{{ client.created_at }}</td>
+                        <td><a href="{{ url_for('clientsEdit', {id: client.id}   ) }}" class="btn btn-success">Edit</a>
+                            <form action="{{ url_for('clientsDelete', {id: client.id}   ) }}" method="post" enctype="application/x-www-form-urlencoded">
+                                <input type="hidden" name="_METHOD" value="DELETE"/>
+                                <input class="btn btn-primary" type="submit" value="Delete" onclick="return confirm('are you sure?')"/>
+                            </form>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+            {% endif %}
+
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

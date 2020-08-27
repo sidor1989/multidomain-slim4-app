@@ -1,0 +1,11 @@
+{# template/clients/create.twig #}
+{% extends 'admin/layout.twig' %}
+{% block title %}Course edit{% endblock %}
+{% block content %}
+
+    <form action="{{ url_for('coursesEditStore' ,  {id: course.id}) }}" method="post" enctype="multipart/form-data">
+        {% include 'admin/courses/_form.twig' %}
+    </form>
+
+
+{% endblock %}

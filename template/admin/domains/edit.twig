@@ -1,0 +1,11 @@
+{# template/domains/edit.twig #}
+{% extends 'admin/layout.twig' %}
+{% block title %}Domains create{% endblock %}
+{% block content %}
+
+    <form action="{{ url_for('domainsEditStore', {id: domain.id}   ) }}" method="post">
+        {% include 'admin/domains/_form.twig' %}
+    </form>
+
+
+{% endblock %}

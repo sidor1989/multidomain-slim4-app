@@ -1,0 +1,11 @@
+{# template/albums/create.twig #}
+{% extends 'admin/layout.twig' %}
+{% block title %}Album create{% endblock %}
+{% block content %}
+
+    <form action="{{ url_for('albumsStore') }}" method="post" enctype="multipart/form-data">
+        {% include 'admin/albums/_form.twig' %}
+    </form>
+
+
+{% endblock %}
